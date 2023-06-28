@@ -25,18 +25,22 @@ document.querySelector('button[type="submit"]').addEventListener('click', (e) =>
 
     document.getElementById('result').textContent = "Please wait..."
 
-    fetch("/.netlify/functions/take-screenshot", options)
-        .then((res) => res.json())
-        .then((res) => {
-            
-            if (!res.buffer) return document.getElementById('result').textContent = 'Error capturing screenshot';
+    f1 = async () =>{
+        await fetch("/.netlify/functions/take-screenshot", options)
+            .then((res) => res.json())
+            .then((res) => {
 
-            const img = document.createElement('img');
-            img.src = bufferToImageUrl(res.buffer.data);
-            document.getElementById('result').innerHTML = img.outerHTML;
-        })
-        .catch((err) => {
-            console.log(err)
-            document.getElementById('result').textContent = `Error: ${err.toString()}`
-        });
+                if (!res.buffer) return document.getElementById('result').textContent = 'Error capturing screenshot';
+
+                const img = document.createElement('img');
+                img.src = bufferToImageUrl(res.buffer.data);
+                document.getElementById('result').innerHTML = img.outerHTML;
+            })
+            .catch((err) => {
+                console.log(err)
+                document.getElementById('result').textContent = `Error: ${err.toString()}`
+            });
+
+        f1()
+    }
 });
