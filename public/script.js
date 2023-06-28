@@ -41,6 +41,9 @@ document.querySelector('button[type="submit"]').addEventListener('click', (e) =>
                 document.getElementById('result').textContent = `Error: ${err.toString()}`
             });
 
-        f1()
+
     }
+
+    f1()
+
 });
