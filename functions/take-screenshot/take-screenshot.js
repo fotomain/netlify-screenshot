@@ -1,7 +1,13 @@
+
+
+// [build.environment]
+// AWS_LAMBDA_JS_RUNTIME = "nodejs12.x"
+
 const chromium = require('chrome-aws-lambda');
 
 exports.handler = async (event, context) => {
 
+    console.log('=== event.body ',event.body)
     const pageToScreenshot = JSON.parse(event.body).pageToScreenshot;
 
     if (!pageToScreenshot) return {
@@ -15,7 +21,7 @@ exports.handler = async (event, context) => {
         executablePath: await chromium.executablePath,
         headless: chromium.headless,
     });
-    
+
     const page = await browser.newPage();
 
     await page.goto(pageToScreenshot, { waitUntil: 'networkidle2' });
@@ -23,12 +29,12 @@ exports.handler = async (event, context) => {
     const screenshot = await page.screenshot({ encoding: 'binary' });
 
     await browser.close();
-  
+
     return {
         statusCode: 200,
-        body: JSON.stringify({ 
-            message: `Complete screenshot of ${pageToScreenshot}`, 
-            buffer: screenshot 
+        body: JSON.stringify({
+            message: `Complete screenshot of ${pageToScreenshot}`,
+            buffer: screenshot
         })
     }
 
