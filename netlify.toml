@@ -11,3 +11,10 @@ for = "/*"
 Access-Control-Allow-Origin = "*"
 Access-Control-Allow-Headers = "Content-Type"
 Access-Control-Allow-Methods = "GET,POST,PUT,DELETE,OPTION"
+Access-Control-Allow-Credentials: "true"
+
+#https://answers.netlify.com/t/working-netlify-function-returns-502/14843/7
+#headers: JSON.stringify({
+#'Access-Control -Allow-Origin': '*',
+#'Access-Control-Allow-Credentials': true
+#}),

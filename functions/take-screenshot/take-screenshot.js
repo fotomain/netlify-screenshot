@@ -35,7 +35,11 @@ exports.handler = async (event, context) => {
         body: JSON.stringify({
             message: `Complete screenshot of ${pageToScreenshot}`,
             buffer: screenshot
-        })
+        }),
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': "true"
+        },
     }
 
 }
